@@ -1,5 +1,6 @@
-import React from "react";
-import GoogleLogin from "react-google-login";
+import React, { useEffect, useState } from "react";
+import jwt_decode from "jwt-decode";
+// import GoogleLogin from "@leecheuk/react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectSignedIn,
@@ -9,14 +10,29 @@ import {
 import "../styling/home.css";
 
 const Homepage = () => {
-  const isSignedIn = useSelector(selectSignedIn);
-
+  // const [user, setUser] = useState({});
   const dispatch = useDispatch();
-  const login = (Response) => {
-    console.log(Response);
+
+  function handleCallbackResponse(response) {
+    const userObject = jwt_decode(response.credential);
+    console.log(userObject);
     dispatch(setSignedIn(true));
-    dispatch(setUserData(Response.profileObj));
-  };
+    dispatch(setUserData(userObject));
+  }
+
+  const isSignedIn = useSelector(selectSignedIn);
+  useEffect(() => {
+    /* global google */
+    google.accounts.id.initialize({
+      client_id:
+        "226419600673-cfhklr7i2uj7ohvb3qshdkkmduv1t9bh.apps.googleusercontent.com",
+      callback: handleCallbackResponse,
+    });
+    google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+      theme: "outline",
+      size: "",
+    });
+  }, [isSignedIn]);
 
   return (
     <div className="home-page" style={{ display: isSignedIn ? "none" : "" }}>
@@ -28,22 +44,7 @@ const Homepage = () => {
             we provide high quality online resource for reading blogs. just sign
             up and start reading some quality blogs.
           </p>
-          <GoogleLogin
-            clientId="AIzaSyDTbTJsBBwgUG_CciZ8ecNw77wXDLJ-kNc"
-            render={(renderProps) => (
-              <button
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-                className="login-button"
-              >
-                Login with Google
-              </button>
-            )}
-            onSuccess={login}
-            onFailure={login}
-            isSigedIn={true}
-            cookiePolicy={"single-host-origin"}
-          />
+          <div id="signInDiv"></div>
         </div>
       ) : (
         ""

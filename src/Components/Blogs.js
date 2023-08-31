@@ -6,8 +6,7 @@ import "../styling/blogs.css";
 
 const Blogs = () => {
   const searchInput = useSelector(selectUserInput);
-  const blog_url = `https://gnews.io/api/v4/search?q=
-    ${searchInput}$token=19b9f8a7ae4d12e6ac868c297bbfa90d`;
+  const blog_url = `https://gnews.io/api/v4/search?q="${searchInput}"&lang=en&country=us&max=10&apikey=19b9f8a7ae4d12e6ac868c297bbfa90d`;
   const dispatch = useDispatch();
   const [blogs, setBlogs] = useState();
 
@@ -16,9 +15,9 @@ const Blogs = () => {
   useEffect(() => {
     axios
       .get(blog_url)
-      .then((Response) => {
-        dispatch(setBlogData(Response.data));
-        setBlogs(Response.data);
+      .then((response) => {
+        dispatch(setBlogData(response.data));
+        setBlogs(response.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -29,10 +28,10 @@ const Blogs = () => {
   return (
     <div className="blog-page">
       <h1 className="blog-page-header">Blogs</h1>
-      {loading ? <h1 classname="loading">Loading...</h1> : ""}
+      {loading ? <h1 className="loading">Loading...</h1> : ""}
       <div className="blogs">
         {blogs?.articles?.map((blog) => (
-          <a href={blog.url} target="blank" className="blog">
+          <a key={blog.title} href={blog.url} target="blank" className="blog">
             <img src={blog.image} alt="blogImage" />
             <div>
               <h3 className="sourceName">

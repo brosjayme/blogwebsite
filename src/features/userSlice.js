@@ -5,7 +5,7 @@ const userSlice = createSlice({
   initialState: {
     isSignedIn: false,
     userData: null,
-    searchInput: " ",
+    searchInput: "tech",
     blogData: null,
   },
   reducers: {
@@ -16,15 +16,15 @@ const userSlice = createSlice({
       state.isUserData = action.payload;
     },
     setSearchInput: (state, action) => {
-      state.isSearchInput = action.payload;
+      state.searchInput = action.payload;
     },
     setBlogData: (state, action) => {
-      state.isBlogData = action.payload;
+      state.blogData = action.payload;
     },
   },
 });
 
-export const { setSignedIn, setUserData, setInput, setBlogData } =
+export const { setSignedIn, setUserData, setSearchInput, setBlogData } =
   userSlice.actions;
 
 export const selectSignedIn = (state) => state.user.isSignedIn;

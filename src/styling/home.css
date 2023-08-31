@@ -21,5 +21,28 @@ text-align: center;
     line-height: 1rem;
     margin: 10px auto;
     margin-top: 0;
-    
+    font-weight: 900;
+    letter-spacing: -4px;
+    color: rgba(17,17,17);
+    text-decoration: underline;
+}
+.login-message > p {
+    padding: 15px 0;
+     line-height: 1em;
+     margin: 50%;
+     margin-top: auto;
+     font-size: 16px;
+} 
+
+.login-button {
+    width: 300px;
+    margin: 15px auto opx auto;
+    padding: 15px 0; 
+    border:none;
+    background: rgba(17,17,17);
+   font-family: inter;
+   color: white;
+   font-size: 15px;
+   font-weight: 500;
+   cursor: pointer;
 }

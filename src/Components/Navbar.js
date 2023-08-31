@@ -1,11 +1,10 @@
 import { Avatar } from "@material-ui/core";
 import React, { useState } from "react";
-import { GoogleLogout } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectSignedIn,
   selectUserData,
-  setInput,
+  setSearchInput,
   setSignedIn,
   setUserData,
 } from "../features/userSlice";
@@ -13,19 +12,20 @@ import {
 import "../styling/Navbar.css";
 
 const Navbar = () => {
-  const [inputValue, setInputVaule] = useState("");
+  const [inputValue, setInputVaule] = useState("tech");
   const isSignedIn = useSelector(selectSignedIn);
   const userData = useSelector(selectUserData);
 
   const dispatch = useDispatch();
-  const logout = (Response) => {
+
+  const logout = (response) => {
     dispatch(setSignedIn(false));
     dispatch(setUserData(null));
   };
 
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(setInput(inputValue));
+    dispatch(setSearchInput(inputValue));
   };
 
   return (
@@ -49,23 +49,13 @@ const Navbar = () => {
         <div className="navbar-user-data">
           <Avatar
             className="user"
-            src={userData?.imageUrl}
+            src={userData?.picture}
             alt={userData?.name}
           />
-          <h1 className="signedIn">{userData?.givenName}</h1>
-          <GoogleLogout
-            clientId="AIzaSyDTbTJsBBwgUG_CciZ8ecNw77wXDLJ-kNc"
-            render={(renderProps) => (
-              <button
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-                className="logout-button"
-              >
-                Logout😮
-              </button>
-            )}
-            onLogoutSuccess={logout}
-          />
+          <h1 className="signedIn">{userData?.given_name}</h1>
+          <button onClick={logout} className="logout-button">
+            Logout😮
+          </button>
         </div>
       ) : (
         <h1 className="notSignedIn">User not available😯</h1>
