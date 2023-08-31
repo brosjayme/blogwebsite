@@ -7,7 +7,7 @@ import {
   setSignedIn,
   setUserData,
 } from "../features/userSlice";
-import "../styling/home.css";
+import "../styling/homepage.css";
 
 const Homepage = () => {
   // const [user, setUser] = useState({});
@@ -39,12 +39,12 @@ const Homepage = () => {
       {!isSignedIn ? (
         <div className="login-message">
           <h2>🔋</h2>
-          <h1>A Readers favourite place!!</h1>
+          <h1 className="">A Readers favourite place!!</h1>
           <p>
             we provide high quality online resource for reading blogs. just sign
             up and start reading some quality blogs.
           </p>
-          <div id="signInDiv"></div>
+          <div className="signInDiv" id="signInDiv"></div>
         </div>
       ) : (
         ""

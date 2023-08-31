@@ -10,39 +10,44 @@ text-align: center;
 .login-message{
     display: flex;
     flex-direction: column;
+    padding: 32px;
+    background: gray;
 }
 .login-message> h2{
     font-size: 80px;
     margin: 0;
 }
 .login-message > h1 {
-    font-size: 100px;
+    font-size: 40px;
     width: 80%;
-    line-height: 1rem;
-    margin: 10px auto;
+    line-height: 5rem;
+    margin: 4px auto;
     margin-top: 0;
-    font-weight: 900;
+    font-weight: 600;
     letter-spacing: -4px;
     color: rgba(17,17,17);
     text-decoration: underline;
 }
+
 .login-message > p {
-    padding: 15px 0;
+     padding: 15px 0;
      line-height: 1em;
-     margin: 50%;
      margin-top: auto;
      font-size: 16px;
+     font-weight: 400;
+     color: #f7b7b7;
 } 
+.login-message > p:hover{
+    color: rgb(62, 238, 232);
+}
 
-.login-button {
+.signInDiv {
     width: 300px;
     margin: 15px auto opx auto;
-    padding: 15px 0; 
+    display: flex;
     border:none;
-    background: rgba(17,17,17);
-   font-family: inter;
+   font-family: Inter;
    color: white;
-   font-size: 15px;
    font-weight: 500;
    cursor: pointer;
 }
